@@ -9,7 +9,12 @@ or
 go run github.com/rapidstellar/gohexa -name myproject -template hexagonal
 ```
 
-### Golang Fiber Example
+### Golang Hexagonal Example
+- Fiber 
 ```
 go run github.com/rapidstellar/gohexa -name myproject -template hexa-fiber
+```
+- gRPC 
+```
+go run github.com/rapidstellar/gohexa -name myproject -template hexa-grpc
 ```
