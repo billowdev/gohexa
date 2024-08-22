@@ -1,0 +1,1 @@
+# gohexa - Golang Hexagonal Directory Template
