@@ -21,13 +21,13 @@ The Routes Generator tool creates Go route handling files for a specified featur
 ### Command
 To generate a route file, use the following command:
 ```bash
-go run ./generators/routes -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/generators/routes -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Route File:
 ```bash
-go run ./generators/routes -feature="SeaPort" -output ./internal/routers -project my_project
+go run github.com/rapidstellar/gohexa/generators/routes -feature="SeaPort" -output ./internal/routers -project my_project
 ```
 This command generates a seaport_routes.go file in the ./internal/routers directory.
 

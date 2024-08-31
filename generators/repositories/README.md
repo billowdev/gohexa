@@ -20,13 +20,13 @@ The Repositories Generator tool creates Go implementation files for repositories
 ### Command
 To generate a repository file, use the following command:
 ```bash
-go run ./generators/repositories -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/generators/repositories -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 Generate Repository File:
 ```bash
-go run ./generators/repositories -feature="Order" -output ./internal/adapters/repositories -project my_project
+go run github.com/rapidstellar/gohexa/generators/repositories -feature="Order" -output ./internal/adapters/repositories -project my_project
 ```
 This command generates an `order_repository.go` file in the `./internal/adapters/repositories` directory.
 
