@@ -11,19 +11,19 @@ The Project Generator tool creates a new project directory structure based on a 
 ## Command
 To generate a new project, use the following command:
 ```bash
-go run github.com/rapidstellar/gohexa -generate project -name <ProjectName> -template <TemplateName>
+gohexa -generate project -name <ProjectName> -template <TemplateName>
 ```
 
 ## Example Commands
 1. Generate Project Using Default Template:
 ```bash
-go run github.com/rapidstellar/gohexa -generate project -name MyNewProject
+gohexa -generate project -name MyNewProject
 ```
 This command creates a new project named MyNewProject using the default hexagonal template.
 
 2. Generate Project Using a Custom Template:
 ```bash
-go run github.com/rapidstellar/gohexa  -generate project -name MyCustomProject -template custom_template
+gohexa  -generate project -name MyCustomProject -template custom_template
 ```
 This command creates a new project named MyCustomProject using the custom_template template.
 

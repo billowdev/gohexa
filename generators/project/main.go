@@ -17,5 +17,6 @@ func main() {
 		return
 	}
 
+
 	utils.CreateProject(*projectName, *templateName)
 }
