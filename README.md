@@ -8,6 +8,9 @@ With gohexa, you can quickly set up new projects, modules, and components using 
 It integrates seamlessly with GORM for database interactions and Fiber v2 for high-performance web frameworks, 
 ensuring that your REST API development is both rapid and structured. This tool simplifies complex tasks, enabling you to focus on building features rather than managing boilerplate code.
 
+## Hexagonal Architecture in Golang Example
+https://github.com/rapidstellar/exclusive-go-hexa
+
 ## Setup environment variables for `gohexa` CLI 
 
 in each platform and run your CLI tool using those variables, you can follow these platform-specific instructions. Here's how you can do it:
