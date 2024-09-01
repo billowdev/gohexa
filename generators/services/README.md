@@ -20,13 +20,13 @@ The Services Generator tool creates Go service implementation files for a specif
 Command
 To generate a service file, use the following command:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/services -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/generators/services -generate service -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Service File:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/services -feature="Order" -output ./internal/core/services -project my_project
+go run github.com/rapidstellar/gohexa/generators/services -generate service -feature="Order" -output ./internal/core/services -project my_project
 ```
 This command generates an order_service.go file in the ./internal/core/services directory.
 

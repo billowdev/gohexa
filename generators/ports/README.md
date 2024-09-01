@@ -17,13 +17,13 @@ The Ports Generator tool creates Go interface files for ports in a specified fea
 ### Command
 To generate a ports file, use the following command:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/ports -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/generators/ports -generate port -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Ports File:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/ports -feature="Order" -output ./internal/core/ports -project my_project
+go run github.com/rapidstellar/gohexa/generators/ports -generate port -feature="Order" -output ./internal/core/ports -project my_project
 ```
 
 This command generates an order_ports.go file in the `./internal/core/ports` directory.
