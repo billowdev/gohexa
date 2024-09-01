@@ -4,61 +4,61 @@
 go hexagonal template
 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject
+go run github.com/rapidstellar/gohexa -generate project -name myproject
 ```
 or
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexagonal
+go run github.com/rapidstellar/gohexa -generate project -name myproject -template hexagonal
 ```
 
 ### Golang Hexagonal Example
 - Fiber 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexa-fiber
+go run github.com/rapidstellar/gohexa -generate project -name myproject -template hexa-fiber
 ```
 - gRPC 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexa-grpc
+go run github.com/rapidstellar/gohexa -generate project -name myproject -template hexa-grpc
 ```
 
 ### Hexagonal CRUD Files generator example
 
 #### database transactor
 ```bash
-go run github.com/rapidstellar/gohexa/transactor -output="./internal/adapters/database"
+go run github.com/rapidstellar/gohexa/transactor -generate transactor -output="./internal/adapters/database"
 ```
 
 #### models generator (gorm)
 ```bash
-go run github.com/rapidstellar/gohexa/generators/models/main.go -feature="Todo" -output="./internal/adapters/database/models" -uuid=true
+go run github.com/rapidstellar/gohexa/generators/models/main.go -generate model -feature="Todo" -output="./internal/adapters/database/models" -uuid=true
 ```
 or 
 ```bash
-go run github.com/rapidstellar/gohexa/generators/models/main.go -feature="Todo" -output="./internal/adapters/database/models" -uuid=false
+go run github.com/rapidstellar/gohexa/generators/models/main.go -generate model -feature="Todo" -output="./internal/adapters/database/models" -uuid=false
 ```
 
 #### domain generator (gorm)
 ```bash
-go run github.com/rapidstellar/gohexa/generators/domain/main.go -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=true
+go run github.com/rapidstellar/gohexa/generators/domain/main.go -generate domain -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=true
 ```
 or uint id increamenter
 ```bash
-go run github.com/rapidstellar/gohexa/generators/domain/main.go -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=false
+go run github.com/rapidstellar/gohexa/generators/domain/main.go -generate domain -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=false
 ```
 
 #### repo generator
 ```bash
-go run github.com/rapidstellar/gohexa/generators/repositories -feature="Todo" -output="./internal/adapters/repositories" -project="my_project"
+go run github.com/rapidstellar/gohexa/generators/repositories -generate repository -feature="Todo" -output="./internal/adapters/repositories" -project="my_project"
 ```
 
 #### services generator
 ```bash
-go run github.com/rapidstellar/gohexa/generators/services -feature="Todo" -output="./internal/core/services" -project="my_project"
+go run github.com/rapidstellar/gohexa/generators/services -generate service -feature="Todo" -output="./internal/core/services" -project="my_project"
 ```
 
 #### ports generator
 ```bash
-go run github.com/rapidstellar/gohexa/generators/ports/main.go -feature="Todo" -output="./internal/core/ports" -project="my_project"
+go run github.com/rapidstellar/gohexa/generators/ports/main.go -generate port -feature="Todo" -output="./internal/core/ports" -project="my_project"
 ```
 
 #### handlers generator
@@ -69,6 +69,16 @@ go run github.com/rapidstellar/gohexa/generators/handlers -feature="Todo" -outpu
 ```bash
 go run github.com/rapidstellar/gohexa/generators/routers -feature="Todo" -output="./internal/adapters/http/routers" -project=my_project
 ```
+
+#### app generator
+```bash
+go run github.com/rapidstellar/gohexa/generators/app -feature="Todo" -output ./internal/adapters/app -project my_project
+```
+or
+```bash
+go run github.com/rapidstellar/gohexa/cmd/main.go -generate app -feature="Todo" -output ./internal/adapters/app -project my_project
+```
+
 
 # Project Generator
 
