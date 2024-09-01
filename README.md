@@ -1,74 +1,190 @@
+![GoHexa](images/GOHEXA.png)
+
 # Get started
+
+gohexa is a robust code generator tailored for Golang projects, particularly useful when working with REST APIs using GORM and Fiber v2. Designed to streamline the development process, 
+gohexa leverages the Hexagonal Architecture to help you efficiently scaffold and organize your applications.
+With gohexa, you can quickly set up new projects, modules, and components using well-defined templates that follow best practices in software design. 
+It integrates seamlessly with GORM for database interactions and Fiber v2 for high-performance web frameworks, 
+ensuring that your REST API development is both rapid and structured. This tool simplifies complex tasks, enabling you to focus on building features rather than managing boilerplate code.
+
+## Hexagonal Architecture in Golang Example
+https://github.com/rapidstellar/exclusive-go-hexa
+
+## Setup environment variables for `gohexa` CLI 
+
+in each platform and run your CLI tool using those variables, you can follow these platform-specific instructions. Here's how you can do it:
+
+### 1. macOS/Linux
+Step 1: Set Environment Variables Temporarily
+You can set environment variables temporarily for a single command by prepending the command with the environment variables.
+
+```bash
+MY_VAR="some_value" OTHER_VAR="another_value" ./build/gohexa-mac
+```
+
+Step 2: Set Environment Variables Persistently
+To set environment variables persistently, you can add them to your shell profile (e.g., `~/.bashrc`, `~/.bash_profile`, `~/.zshrc` for Zsh users):
+
+```bash
+alias gohexa="~/path/to/build/gohexa-mac"
+```
+
+After adding the variables, source the profile to apply the changes:
+```bash
+source ~/.bashrc
+```
+
+Now, you can run your CLI tool:
+```bash
+gohexa -name new_project
+```
+
+### 2. Windows
+Step 1: Set Environment Variables Temporarily
+To set environment variables temporarily for a single command in Command Prompt:
+```bash
+set MY_VAR=some_value && set OTHER_VAR=another_value && build\gohexa.exe
+```
+In PowerShell:
+```bash
+$env:MY_VAR="some_value"; $env:OTHER_VAR="another_value"; .\build\gohexa.exe
+```
+
+Step 2: Set Environment Variables Persistently
+To set environment variables persistently in Windows:
+
+1. Open the Start menu, search for "Environment Variables," and select "Edit the system environment variables."
+2. In the System Properties window, click "Environment Variables."
+Under "User variables" or "System variables," click "New" and add your variable name and value.
+3. Once set, these environment variables will be available to all command-line sessions, and you can run your CLI tool:
+
+```bash
+build\gohexa.exe
+```
+
+### 3. Using Environment Variables in Go
+In your Go code, you can access these environment variables using the os.Getenv function:
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	myVar := os.Getenv("MY_VAR")
+	otherVar := os.Getenv("OTHER_VAR")
+
+	fmt.Println("MY_VAR:", myVar)
+	fmt.Println("OTHER_VAR:", otherVar)
+
+	// Your CLI logic here
+}
+```
+### 4. Running the CLI with Environment Variables
+After setting the environment variables, you can run the CLI on each platform, and it will pick up those variables.
+
+macOS/Linux:
+```bash
+./build/gohexa-mac
+```
+
+Windows:
+```bash
+build\gohexa.exe
+```
+
+### Conclusion
+By setting environment variables either temporarily or persistently on each platform, you can control the runtime environment of your CLI tool. The CLI can then access these variables using Go’s `os.Getenv` function, allowing you to configure the tool's behavior based on the environment.
+
 
 ## go-hexagonal
 go hexagonal template
 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject
+gohexa -generate project -output myproject
 ```
 or
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexagonal
+gohexa -generate project -output myproject -template hexagonal
 ```
 
 ### Golang Hexagonal Example
+
+- Help
+```
+gohexa --help
+```
+
 - Fiber 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexa-fiber
+gohexa -generate project -output myproject -template hexa-fiber
 ```
 - gRPC 
 ```bash
-go run github.com/rapidstellar/gohexa -name myproject -template hexa-grpc
+gohexa -generate project -output myproject -template hexa-grpc
 ```
 
 ### Hexagonal CRUD Files generator example
 
 #### database transactor
 ```bash
-go run ./transactor -output="./internal/adapters/database"
+gohexa -generate transactor -output="./internal/adapters/database"
 ```
 
 #### models generator (gorm)
 ```bash
-go run ./generators/models/main.go -feature="Todo" -output="./internal/adapters/database/models" -uuid=true
+gohexa -generate model -feature="Todo" -output="./internal/adapters/database/models" -uuid=true
 ```
 or 
 ```bash
-go run ./generators/models/main.go -feature="Todo" -output="./internal/adapters/database/models" -uuid=false
+gohexa -generate model -feature="Todo" -output="./internal/adapters/database/models" -uuid=false
 ```
 
 #### domain generator (gorm)
 ```bash
-go run ./generators/domain/main.go -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=true
+gohexa -generate domain -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=true
 ```
 or uint id increamenter
 ```bash
-go run ./generators/domain/main.go -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=false
+gohexa -generate domain -feature="Todo" -output="./internal/core/domain" -project="my_project" -uuid=false
 ```
 
 #### repo generator
 ```bash
-go run ./generators/repositories -feature="Todo" -output="./internal/adapters/repositories" -project="my_project"
+gohexa -generate repository -feature="Todo" -output="./internal/adapters/repositories" -project="my_project"
 ```
 
 #### services generator
 ```bash
-go run ./generators/services -feature="Todo" -output="./internal/core/services" -project="my_project"
+gohexa -generate service -feature="Todo" -output="./internal/core/services" -project="my_project"
 ```
 
 #### ports generator
 ```bash
-go run ./generators/ports/main.go -feature="Todo" -output="./internal/core/ports" -project="my_project"
+gohexa -generate port -feature="Todo" -output="./internal/core/ports" -project="my_project"
 ```
 
 #### handlers generator
 ```bash
-go run ./generators/handlers -feature="Todo" -output="./internal/adapters/http/handlers" -project=my_project
+gohexa -feature="Todo" -output="./internal/adapters/http/handlers" -project=my_project
 ```
 #### routes generator
 ```bash
-go run ./generators/routers -feature="Todo" -output="./internal/adapters/http/routers" -project=my_project
+gohexa -feature="Todo" -output="./internal/adapters/http/routers" -project=my_project
 ```
+
+#### app generator
+```bash
+gohexa -feature="Todo" -output ./internal/adapters/app -project my_project
+```
+or
+```bash
+gohexa -generate app -feature="Todo" -output ./internal/adapters/app -project my_project
+```
+
 
 # Project Generator
 
@@ -82,19 +198,19 @@ The Project Generator tool creates a new project directory structure based on a 
 ## Command
 To generate a new project, use the following command:
 ```bash
-go run ./generators/project -name <ProjectName> -template <TemplateName>
+gohexa -output <ProjectName> -template <TemplateName>
 ```
 
 ## Example Commands
 1. Generate Project Using Default Template:
 ```bash
-go run ./generators/project -name MyNewProject
+gohexa -output MyNewProject
 ```
 This command creates a new project named MyNewProject using the default hexagonal template.
 
 2. Generate Project Using a Custom Template:
 ```bash
-go run ./generators/project -name MyCustomProject -template custom_template
+gohexa -output MyCustomProject -template custom_template
 ```
 This command creates a new project named MyCustomProject using the custom_template template.
 
@@ -123,7 +239,61 @@ hexagonal/
 
 # Get started with RPS Hexa generator
 
+## Transactor File Generator
 
+### Overview
+The Transactor File Generator is a command-line tool that creates a transactor.go file in the specified output directory. This file contains a set of transaction management utilities for use with the Gorm ORM in a hexagonal architecture.
+
+### Features
+- Generates a transactor.go file with pre-defined transaction management functions.
+- Supports injecting, extracting, and managing database transactions within a context.
+- Provides functions for handling transactions with timeout contexts.
+
+### Usage
+#### Flags
+`-output <OutputDirectory>`: The output directory where the transactor.go file will be generated.
+
+### Command
+To generate the transactor.go file, run the following command:
+
+```bash
+gohexa -generate transactor -output <OutputDirectory>
+```
+
+### Example Command
+Generate the transactor.go file in the ./database directory:
+
+```bash
+gohexa -generate transactor -output ./database
+```
+
+### Output
+The tool generates a file named transactor.go in the specified directory. The generated file includes:
+
+- Transaction Management: Functions for beginning, committing, and rolling back transactions.
+- Context Injection/Extraction: Utilities for injecting and extracting the transaction from the context.
+- Timeout Handling: Functions for executing transactions with a context timeout.
+
+### Generated File Structure
+The transactor.go file includes the following structure:
+
+- Package: database
+- Transaction Utilities:
+	- InjectTx(ctx context.Context, tx *gorm.DB) context.Context
+	- ExtractTx(ctx context.Context) *gorm.DB
+	- HelperExtractTx(ctx context.Context, db *gorm.DB) *gorm.DB
+
+- Transaction Management:
+	- BeginTransaction() (*gorm.DB, error)
+	- RollbackTransaction(tx *gorm.DB) error
+	- WithinTransaction(ctx context.Context, tFunc func(ctx context.Context) error) error
+	- WithTransactionContextTimeout(ctx context.Context, timeout time.Duration, tFunc func(ctx context.Context) error) error
+- Interfaces:
+	- IDatabaseTransactor
+
+### Notes
+Ensure that the output directory exists or the tool will create it.
+The generated transactor.go file is designed to work with the Gorm ORM in a hexagonal architecture.
 
 ## Models Generator
 
@@ -146,19 +316,19 @@ The Models Generator tool creates Go model files for a specified feature. It sup
 ### Command
 To generate a model file, use the following command:
 ```bash
-go run ./generators/models -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> -uuid
+gohexa -generate model -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> -uuid
 ```
 
 ### Example Commands
 1. Generate Model File with UUID:
 ```bash
-go run ./generators/models -feature="Todo" -output ./internal/adapters/database/models -project my_project -uuid
+gohexa -generate model -feature="Todo" -output ./internal/adapters/database/models -project my_project -uuid
 ```
 This command generates a todo.go file in the ./internal/adapters/database/models directory with UUID as the ID field.
 
 2. Generate Model File with Auto-Increment ID:
 ```bash
-go run ./generators/models -feature="Todo" -output ./internal/adapters/database/models -project my_project
+gohexa -generate model -feature="Todo" -output ./internal/adapters/database/models -project my_project
 ```
 This command generates a `todo.go` file in the `./internal/adapters/database/models` directory with auto-incrementing ID.
 
@@ -216,18 +386,18 @@ This tool generates Go domain files based on a specified feature name. It suppor
 ### Command
 To generate a domain file, use the following command:
 ```bash
-go run ./generators/domain -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> [-uuid]
+gohexa -generate domain -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> [-uuid]
 ```
 Example Commands
 Without UUID:
 ```bash
-go run ./generators/domain -feature="Todo" -output ./internal/adapters/domain -project my_project
+gohexa -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project
 ```
 This command generates a todo_domain.go file in the ./internal/adapters/domain directory with an auto-increment integer ID.
 
 With UUID:
 ```bash
-go run ./generators/domain -feature="Todo" -output ./internal/adapters/domain -project my_project -uuid
+gohexa -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project -uuid
 ```
 This command generates a todo_domain.go file in the ./internal/adapters/domain directory with a UUID as the ID.
 
@@ -305,13 +475,13 @@ The Ports Generator tool creates Go interface files for ports in a specified fea
 ### Command
 To generate a ports file, use the following command:
 ```bash
-go run ./generators/ports -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate port -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Ports File:
 ```bash
-go run ./generators/ports -feature="Order" -output ./internal/core/ports -project my_project
+gohexa -generate port -feature="Order" -output ./internal/core/ports -project my_project
 ```
 
 This command generates an order_ports.go file in the `./internal/core/ports` directory.
@@ -374,13 +544,13 @@ The Repositories Generator tool creates Go implementation files for repositories
 ### Command
 To generate a repository file, use the following command:
 ```bash
-go run ./generators/repositories -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate repository -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 Generate Repository File:
 ```bash
-go run ./generators/repositories -feature="Order" -output ./internal/adapters/repositories -project my_project
+gohexa -generate repository -feature="Order" -output ./internal/adapters/repositories -project my_project
 ```
 This command generates an `order_repository.go` file in the `./internal/adapters/repositories` directory.
 
@@ -495,13 +665,13 @@ The Services Generator tool creates Go service implementation files for a specif
 Command
 To generate a service file, use the following command:
 ```bash
-go run ./generators/services -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate service -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Service File:
 ```bash
-go run ./generators/services -feature="Order" -output ./internal/core/services -project my_project
+gohexa -generate service -feature="Order" -output ./internal/core/services -project my_project
 ```
 This command generates an order_service.go file in the ./internal/core/services directory.
 
@@ -622,13 +792,13 @@ The template generates a Go file with handlers for CRUD operations:
 ### Command
 To generate a handler file, use the following command:
 ```bash
-go run ./generators/handlers -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate handler -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 ### Example Commands
 1. Generate Handlers File:
 
 ```bash
-go run ./generators/handlers -feature="Todo" -output ./internal/adapters/handlers -project my_project
+gohexa -generate handler -feature="Todo" -output ./internal/adapters/handlers -project my_project
 ```
 This command generates a todo_handlers.go file in the ./internal/adapters/handlers directory.
 
@@ -772,13 +942,13 @@ The Routes Generator tool creates Go route handling files for a specified featur
 ### Command
 To generate a route file, use the following command:
 ```bash
-go run ./generators/routes -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate route -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 
 ### Example Commands
 1. Generate Route File:
 ```bash
-go run ./generators/routes -feature="SeaPort" -output ./internal/routers -project my_project
+gohexa -generate route -feature="SeaPort" -output ./internal/routers -project my_project
 ```
 This command generates a seaport_routes.go file in the ./internal/routers directory.
 
@@ -827,11 +997,11 @@ The App File Generator is a command-line tool that generates an application setu
 ### Command
 
 ```bash
-go run ./generators/app -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+gohexa -generate app -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 - example
 ```bash
-go run ./generators/app -feature="Todo" -output ./internal/adapters/app -project my_project
+gohexa -generate app -feature="Todo" -output ./internal/adapters/app -project my_project
 ```
 
 ### Generated File Structure
@@ -873,7 +1043,7 @@ func <FeatureName>App(r routers.RouterImpl, db *gorm.DB) {
 
 ### Example
 ```bash
-go run ./generators/app -feature User -output ./internal/app -project my_project
+gohexa -generate app -feature User -output ./internal/app -project my_project
 ```
 The tool will generate a file named `user_app.go` in the `./internal/app` directory, containing:
 ```go

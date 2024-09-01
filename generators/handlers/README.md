@@ -22,13 +22,13 @@ The template generates a Go file with handlers for CRUD operations:
 ### Command
 To generate a handler file, use the following command:
 ```bash
-go run ./generators/handlers -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/generators/handlers -generate handler -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 ### Example Commands
 1. Generate Handlers File:
 
 ```bash
-go run ./generators/handlers -feature="Todo" -output ./internal/adapters/handlers -project my_project
+go run github.com/rapidstellar/gohexa/generators/handlers -generate handler -feature="Todo" -output ./internal/adapters/handlers -project my_project
 ```
 This command generates a todo_handlers.go file in the ./internal/adapters/handlers directory.
 

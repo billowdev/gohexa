@@ -19,19 +19,19 @@ The Models Generator tool creates Go model files for a specified feature. It sup
 ### Command
 To generate a model file, use the following command:
 ```bash
-go run ./generators/models -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> -uuid
+go run github.com/rapidstellar/gohexa/generators/models -generate model -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> -uuid
 ```
 
 ### Example Commands
 1. Generate Model File with UUID:
 ```bash
-go run ./generators/models -feature="Todo" -output ./internal/adapters/database/models -project my_project -uuid
+go run github.com/rapidstellar/gohexa/generators/models -generate model -feature="Todo" -output ./internal/adapters/database/models -project my_project -uuid
 ```
 This command generates a todo.go file in the ./internal/adapters/database/models directory with UUID as the ID field.
 
 2. Generate Model File with Auto-Increment ID:
 ```bash
-go run ./generators/models -feature="Todo" -output ./internal/adapters/database/models -project my_project
+go run github.com/rapidstellar/gohexa/generators/models -generate model -feature="Todo" -output ./internal/adapters/database/models -project my_project
 ```
 This command generates a `todo.go` file in the `./internal/adapters/database/models` directory with auto-incrementing ID.
 
