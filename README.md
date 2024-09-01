@@ -1,3 +1,5 @@
+![GoHexa](images/GOHEXA.png)
+
 # Get started
 
 gohexa is a robust code generator tailored for Golang projects, particularly useful when working with REST APIs using GORM and Fiber v2. Designed to streamline the development process, 
