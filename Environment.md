@@ -1,7 +1,10 @@
-# To set environment variables 
+# Get started
+
+## Setup environment variables for `gohexa` CLI 
+
 in each platform and run your CLI tool using those variables, you can follow these platform-specific instructions. Here's how you can do it:
 
-## 1. macOS/Linux
+### 1. macOS/Linux
 Step 1: Set Environment Variables Temporarily
 You can set environment variables temporarily for a single command by prepending the command with the environment variables.
 
@@ -26,7 +29,7 @@ Now, you can run your CLI tool:
 gohexa -name new_project
 ```
 
-## 2. Windows
+### 2. Windows
 Step 1: Set Environment Variables Temporarily
 To set environment variables temporarily for a single command in Command Prompt:
 ```bash
@@ -49,7 +52,7 @@ Under "User variables" or "System variables," click "New" and add your variable 
 build\gohexa.exe
 ```
 
-## 3. Using Environment Variables in Go
+### 3. Using Environment Variables in Go
 In your Go code, you can access these environment variables using the os.Getenv function:
 ```
 package main
@@ -69,7 +72,7 @@ func main() {
 	// Your CLI logic here
 }
 ```
-## 4. Running the CLI with Environment Variables
+### 4. Running the CLI with Environment Variables
 After setting the environment variables, you can run the CLI on each platform, and it will pick up those variables.
 
 macOS/Linux:
@@ -82,7 +85,7 @@ Windows:
 build\gohexa.exe
 ```
 
-## Conclusion
+### Conclusion
 By setting environment variables either temporarily or persistently on each platform, you can control the runtime environment of your CLI tool. The CLI can then access these variables using Go’s `os.Getenv` function, allowing you to configure the tool's behavior based on the environment.
 
 

@@ -10,6 +10,7 @@ import (
 
 func CreateProject(name string, template string) {
 	templateDir := "templates/" + template
+	// templateDir := filepath.Join("templates", template)
 
 	err := filepath.WalkDir(templateDir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {

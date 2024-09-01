@@ -16,14 +16,14 @@ The Transactor File Generator is a command-line tool that creates a transactor.g
 To generate the transactor.go file, run the following command:
 
 ```bash
-go run init_transactor.go -generate transactor -output <OutputDirectory>
+gohexa -generate transactor -output <OutputDirectory>
 ```
 
 ### Example Command
 Generate the transactor.go file in the ./database directory:
 
 ```bash
-go run init_transactor.go -generate transactor -output ./database
+gohexa -generate transactor -output ./database
 ```
 
 ### Output
