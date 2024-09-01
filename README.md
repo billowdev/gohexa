@@ -1,5 +1,11 @@
 # Get started
 
+gohexa is a robust code generator tailored for Golang projects, particularly useful when working with REST APIs using GORM and Fiber v2. Designed to streamline the development process, 
+gohexa leverages the Hexagonal Architecture to help you efficiently scaffold and organize your applications.
+With gohexa, you can quickly set up new projects, modules, and components using well-defined templates that follow best practices in software design. 
+It integrates seamlessly with GORM for database interactions and Fiber v2 for high-performance web frameworks, 
+ensuring that your REST API development is both rapid and structured. This tool simplifies complex tasks, enabling you to focus on building features rather than managing boilerplate code.
+
 ## Setup environment variables for `gohexa` CLI 
 
 in each platform and run your CLI tool using those variables, you can follow these platform-specific instructions. Here's how you can do it:
