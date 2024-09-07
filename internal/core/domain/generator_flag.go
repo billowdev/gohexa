@@ -1,13 +1,13 @@
 package domain
 
 type GeneratorFlag struct {
-	GenerateType *string
-	ProjectName  *string
-	FeatureName  *string
-	OutputDir    *string
-	TemplateName *string
-	UseUUID      *bool
-	Help         *bool
+	GenerateType *string `json:"generate"`
+	ProjectName  *string `json:"project"`
+	FeatureName  *string `json:"feature"`
+	OutputDir    *string `json:"output"`
+	TemplateName *string `json:"template"`
+	UseUUID      *bool   `json:"use_uuid"`
+	Help         *bool   `json:"help"`
 }
 
 type GeneratorFlagDomain struct {

@@ -1,8 +1,23 @@
 package domain
 
+import "strings"
+
 type HandlerFlagDomain struct {
 	FeatureName string
 	ProjectName string
+}
+
+// ToLower returns the lowercase version of the input string
+func ToLower(s string) string {
+	return strings.ToLower(s)
+}
+
+// Pluralize returns the plural form of the input string (simple example)
+func Pluralize(s string) string {
+	if strings.HasSuffix(s, "s") {
+		return s
+	}
+	return s + "s"
 }
 
 var HandlerTemplate = `
@@ -14,7 +29,7 @@ import (
 	"time"
 
 	"github.com/{{ .ProjectName }}/internal/adapters/database/models"
-	ports "{{ .ProjectName }}/internal/core/ports/{{ .FeatureName | ToLower }}"
+	ports "github.com/{{ .ProjectName }}/internal/core/ports/{{ .FeatureName | ToLower }}"
 	"github.com/{{ .ProjectName }}/pkg/helpers/filters"
 	"github.com/{{ .ProjectName }}/pkg/helpers/pagination"
 	"github.com/{{ .ProjectName }}/pkg/utils"
@@ -44,7 +59,7 @@ func New{{ .FeatureName }}Handler(
 
 // HandleCreate{{ .FeatureName }} implements I{{ .FeatureName }}Handler.
 func (h *{{ .FeatureName }}Impl) HandleCreate{{ .FeatureName }}(c *fiber.Ctx) error {
-	var payload models.{{ .FeatureName }}
+	var payload domain.{{ .FeatureName }}Domain
 	if err := c.BodyParser(&payload); err != nil {
 		return utils.NewErrorResponse(c, "Invalid request payload", err.Error())
 	}
@@ -53,7 +68,7 @@ func (h *{{ .FeatureName }}Impl) HandleCreate{{ .FeatureName }}(c *fiber.Ctx) er
 	if err := ctx.Err(); err != nil {
 		return c.Context().Err()
 	}
-	res := h.{{ .FeatureName | ToLower }}Service.Create{{ .FeatureName }}(ctx, &payload)
+	res := h.{{ .FeatureName | ToLower }}Service.Create{{ .FeatureName }}(ctx, payload)
 	return c.JSON(res)
 }
 
@@ -74,7 +89,7 @@ func (h *{{ .FeatureName }}Impl) HandleDelete{{ .FeatureName }}(c *fiber.Ctx) er
 
 // HandleUpdate{{ .FeatureName }} implements I{{ .FeatureName }}Handler.
 func (h *{{ .FeatureName }}Impl) HandleUpdate{{ .FeatureName }}(c *fiber.Ctx) error {
-	var payload models.{{ .FeatureName }}
+	var payload domain.{{ .FeatureName }}Domain
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return utils.NewErrorResponse(c, "Invalid ID", err.Error())
@@ -87,7 +102,7 @@ func (h *{{ .FeatureName }}Impl) HandleUpdate{{ .FeatureName }}(c *fiber.Ctx) er
 	if err := ctx.Err(); err != nil {
 		return c.Context().Err()
 	}
-	res := h.{{ .FeatureName | ToLower }}Service.Update{{ .FeatureName }}(ctx, uint(id), &payload)
+	res := h.{{ .FeatureName | ToLower }}Service.Update{{ .FeatureName }}(ctx, uint(id), payload)
 	return c.JSON(res)
 }
 

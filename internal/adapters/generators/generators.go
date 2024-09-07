@@ -1,7 +1,6 @@
 package adapters
 
 import (
-	"flag"
 	"fmt"
 	"os"
 
@@ -34,8 +33,6 @@ func (g *GenratorAdapter) GohexaGeneratorAdapter(gf domain.GeneratorFlag) {
 		FeatureName: *featureName,
 		ProjectName: *projectName,
 	})
-
-	flag.Parse()
 
 	if *help {
 		showHelp()
@@ -193,16 +190,16 @@ func showHelp() {
 	fmt.Println("  -help              Show this help message and exit.")
 	fmt.Println()
 	fmt.Println("Examples:")
-	fmt.Println("  go run github.com/rapidstellar/gohexa -generate project -output myproject")
+	fmt.Println("  gohexa -generate project -output myproject")
 	fmt.Println("    Generates a new project in the 'myproject' directory using the default 'hexagonal' template.")
 	fmt.Println()
-	fmt.Println("  go run github.com/rapidstellar/gohexa -generate project -output myproject -template hexagonal")
+	fmt.Println("  gohexa -generate project -output myproject -template hexagonal")
 	fmt.Println("    Generates a new project in the 'myproject' directory using the 'hexagonal' template.")
 	fmt.Println()
-	fmt.Println("  go run github.com/rapidstellar/gohexa -generate model -output myproject -feature user -project my_project")
+	fmt.Println("  gohexa -generate model -output myproject -feature user -project my_project")
 	fmt.Println("    Generates a model file for the 'user' feature in the 'myproject' directory.")
 	fmt.Println()
-	fmt.Println("  go run github.com/rapidstellar/gohexa -generate app -output myproject -feature user")
+	fmt.Println("  gohexa -generate app -output myproject -feature user")
 	fmt.Println("    Generates an app file for the 'user' feature in the 'myproject' directory.")
 	fmt.Println()
 	fmt.Println("For more information, visit the documentation at https://github.com/rapidstellar/gohexa")

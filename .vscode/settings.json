@@ -1,0 +1,6 @@
+{
+	"go.lintFlags": [
+	  "--exclude=templates/.*"
+	]
+  }
+  
