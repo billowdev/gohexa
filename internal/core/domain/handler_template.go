@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/{{ .ProjectName }}/internal/adapters/database/models"
-	ports "{{ .ProjectName }}/internal/core/ports/{{ .FeatureName | ToLower }}"
+	ports "github.com/{{ .ProjectName }}/internal/core/ports/{{ .FeatureName | ToLower }}"
 	"github.com/{{ .ProjectName }}/pkg/helpers/filters"
 	"github.com/{{ .ProjectName }}/pkg/helpers/pagination"
 	"github.com/{{ .ProjectName }}/pkg/utils"
@@ -44,7 +44,7 @@ func New{{ .FeatureName }}Handler(
 
 // HandleCreate{{ .FeatureName }} implements I{{ .FeatureName }}Handler.
 func (h *{{ .FeatureName }}Impl) HandleCreate{{ .FeatureName }}(c *fiber.Ctx) error {
-	var payload models.{{ .FeatureName }}
+	var payload domain.{{ .FeatureName }}Domain
 	if err := c.BodyParser(&payload); err != nil {
 		return utils.NewErrorResponse(c, "Invalid request payload", err.Error())
 	}
@@ -53,7 +53,7 @@ func (h *{{ .FeatureName }}Impl) HandleCreate{{ .FeatureName }}(c *fiber.Ctx) er
 	if err := ctx.Err(); err != nil {
 		return c.Context().Err()
 	}
-	res := h.{{ .FeatureName | ToLower }}Service.Create{{ .FeatureName }}(ctx, &payload)
+	res := h.{{ .FeatureName | ToLower }}Service.Create{{ .FeatureName }}(ctx, payload)
 	return c.JSON(res)
 }
 
@@ -74,7 +74,7 @@ func (h *{{ .FeatureName }}Impl) HandleDelete{{ .FeatureName }}(c *fiber.Ctx) er
 
 // HandleUpdate{{ .FeatureName }} implements I{{ .FeatureName }}Handler.
 func (h *{{ .FeatureName }}Impl) HandleUpdate{{ .FeatureName }}(c *fiber.Ctx) error {
-	var payload models.{{ .FeatureName }}
+	var payload domain.{{ .FeatureName }}Domain
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return utils.NewErrorResponse(c, "Invalid ID", err.Error())
@@ -87,7 +87,7 @@ func (h *{{ .FeatureName }}Impl) HandleUpdate{{ .FeatureName }}(c *fiber.Ctx) er
 	if err := ctx.Err(); err != nil {
 		return c.Context().Err()
 	}
-	res := h.{{ .FeatureName | ToLower }}Service.Update{{ .FeatureName }}(ctx, uint(id), &payload)
+	res := h.{{ .FeatureName | ToLower }}Service.Update{{ .FeatureName }}(ctx, uint(id), payload)
 	return c.JSON(res)
 }
 
