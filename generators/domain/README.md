@@ -20,18 +20,18 @@ This tool generates Go domain files based on a specified feature name. It suppor
 ### Command
 To generate a domain file, use the following command:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/domain -generate domain -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> [-uuid]
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/domain -generate domain -feature <FeatureName> -output <OutputDirectory> -project <ProjectName> [-uuid]
 ```
 Example Commands
 Without UUID:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/domain -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/domain -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project
 ```
 This command generates a todo_domain.go file in the ./internal/adapters/domain directory with an auto-increment integer ID.
 
 With UUID:
 ```bash
-go run github.com/rapidstellar/gohexa/generators/domain -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project -uuid
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/domain -generate domain -feature="Todo" -output ./internal/adapters/domain -project my_project -uuid
 ```
 This command generates a todo_domain.go file in the ./internal/adapters/domain directory with a UUID as the ID.
 

@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rapidstellar/gohexa/generators/utils"
+	"github.com/rapidstellar/gohexa/internal/core/domain"
+	"github.com/rapidstellar/gohexa/internal/core/services"
 )
 
 func main() {
@@ -23,6 +24,9 @@ func main() {
 		fmt.Printf("Error creating directories: %v\n", err)
 		return
 	}
-
-	utils.GenerateTransactorFile(*outputDir)
+	srv := services.NewGeneratorService(domain.GeneratorFlagDomain{
+		FeatureName: "",
+		ProjectName: "",
+	})
+	srv.GenerateTransactorFile(*outputDir)
 }

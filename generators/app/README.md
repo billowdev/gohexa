@@ -19,11 +19,11 @@ The App File Generator is a command-line tool that generates an application setu
 ### Command
 
 ```bash
-go run github.com/rapidstellar/gohexa/generators/app -generate app -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/app -generate app -feature <FeatureName> -output <OutputDirectory> -project <ProjectName>
 ```
 - example
 ```bash
-go run github.com/rapidstellar/gohexa/generators/app -generate app -feature="Todo" -output ./internal/adapters/app -project my_project
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/app -generate app -feature="Todo" -output ./internal/adapters/app -project my_project
 ```
 
 ### Generated File Structure
@@ -65,7 +65,7 @@ func <FeatureName>App(r routers.RouterImpl, db *gorm.DB) {
 
 ### Example
 ```bash
-go run github.com/rapidstellar/gohexa/generators/app -generate app -feature User -output ./internal/app -project my_project
+go run github.com/rapidstellar/gohexa/internal/adapters/generators/app -generate app -feature User -output ./internal/app -project my_project
 ```
 The tool will generate a file named `user_app.go` in the `./internal/app` directory, containing:
 ```go

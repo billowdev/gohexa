@@ -37,7 +37,7 @@ source ~/.bashrc
 
 Now, you can run your CLI tool:
 ```bash
-gohexa -name new_project
+gohexa -generate project - new_project
 ```
 
 #### If Error 

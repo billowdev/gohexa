@@ -4,7 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/rapidstellar/gohexa/generators/utils"
+	"github.com/rapidstellar/gohexa/internal/core/domain"
+	"github.com/rapidstellar/gohexa/internal/core/services"
 )
 
 func main() {
@@ -16,7 +17,9 @@ func main() {
 		fmt.Println("Please provide a project name using the -name flag.")
 		return
 	}
-
-
-	utils.CreateProject(*projectName, *templateName)
+	srv := services.NewGeneratorService(domain.GeneratorFlagDomain{
+		FeatureName: "",
+		ProjectName: *projectName,
+	})
+	srv.CreateProject(*projectName, *templateName)
 }
