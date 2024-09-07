@@ -1,33 +1,34 @@
-# Start from the official Go image
-FROM golang:1.22-alpine AS builder
+FROM golang:1.22.1-alpine3.18 AS builder
+# FROM golang:1.19.5-alpine3.16 AS builder
+RUN apk --no-cache add gcc g++ make git
+RUN apk --no-cache add tzdata
 
-# Set the working directory inside the container
-WORKDIR /app
+# ARG CGO_ENABLED=0
 
-# Copy the Go module files and download dependencies
-COPY go.mod ./
-RUN go mod download
+WORKDIR /go/src/app
 
-# Copy the source code and templates into the container
 COPY . .
 
-# Build the Go binary from the specified source file
-RUN go build -o gohexa ./cmd/main.go
+RUN GOOS=linux go build -ldflags="-s -w" -o ./bin/web-app ./cmd/main.go
 
-# Create a smaller image for running the binary
-FROM alpine:3.18
+# Start from a minimal Alpine image
+FROM alpine:3.13
 
-# Set the working directory inside the container
-WORKDIR /app
+# # Install required dependencies
+RUN apk --no-cache add ca-certificates
 
-# Copy the binary from the builder stage
-COPY --from=builder /app/gohexa /usr/local/bin/gohexa
+# # Set the working directory
+WORKDIR /usr/bin
 
-# Copy the templates directory from the builder stage
-COPY --from=builder /app/templates /app/templates
+# RUN mkdir logging
 
-# Set the entrypoint for the container
-ENTRYPOINT ["gohexa"]
+# Copy the built Golang application from the builder stage
+COPY --from=builder /go/src/app/bin /go/bin
 
-# Default command (can be overridden)
-CMD ["--help"]
+COPY .env /usr/bin
+
+ENV TZ=Asia/Bangkok 
+
+EXPOSE 80
+ENTRYPOINT /go/bin/web-app --port 80
+

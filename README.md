@@ -37,7 +37,29 @@ source ~/.bashrc
 
 Now, you can run your CLI tool:
 ```bash
-gohexa -name new_project
+gohexa -generate project - new_project
+```
+
+#### If Error 
+
+##### zsh: permission denied: ~/path/to/build/gohexa-mac-arm
+```bash
+chmod +x ~/path/to/build/gohexa-mac-arm
+```
+or
+```bash
+chmod +x ~/path/to/build/gohexa-mac
+```
+
+##### “gohexa-mac-arm” can’t be opened because Apple cannot check it for malicious software. This software needs to be updated. Contact the developer for more information.
+Bypass Gatekeeper Temporarily
+If you prefer to run the command via the terminal, you can do the following:
+
+Open Terminal.
+
+Run the following command to remove the quarantine attribute from the file:
+```bash
+xattr -d com.apple.quarantine ~/path/to/build/gohexa-mac-arm
 ```
 
 ### 2. Windows
