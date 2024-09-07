@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	adapters "github.com/rapidstellar/gohexa/internal/adapters/generators"
 	"github.com/rapidstellar/gohexa/internal/core/domain"
@@ -18,7 +17,6 @@ func main() {
 	help := flag.Bool("help", false, "Show help message")
 	flag.Parse()
 
-	
 	generatorFlag := domain.GeneratorFlag{
 		GenerateType: generateType,
 		ProjectName:  projectName,
@@ -29,9 +27,6 @@ func main() {
 		Help:         help,
 	}
 	genrator := adapters.NewGeneratorAdapter()
-	fmt.Println(*generatorFlag.GenerateType)
-	fmt.Println(*generatorFlag.ProjectName)
-	fmt.Println(*generatorFlag.FeatureName)
-	fmt.Println(*generatorFlag.OutputDir)
 	genrator.GohexaGeneratorAdapter(generatorFlag)
+
 }

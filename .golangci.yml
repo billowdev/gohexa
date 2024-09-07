@@ -1,5 +1,0 @@
-linters-settings:
-  exclude-rules:
-    - path: templates/.* # Regex pattern to match files in the templates folder
-      linters:
-        - '*'
