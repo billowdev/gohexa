@@ -1,7 +1,8 @@
 package utils
 
 import (
-	"github.com/username/project_name/pkg/configs"
+	"hexagonal/pkg/configs"
+
 	"github.com/gofiber/fiber/v2"
 )
 
