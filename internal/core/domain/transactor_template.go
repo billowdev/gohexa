@@ -100,6 +100,29 @@ func (d *TransactorImpl) WithinTransaction(ctx context.Context, tFunc func(ctx c
 	return nil
 }
 
+
+// CommitTransaction commits the transaction if it was started.
+// If the commit fails, it attempts to rollback and returns any errors encountered.
+func (d *TransactorImpl) CommitTransaction(tx *gorm.DB) error {
+	if tx == nil {
+		return nil // No transaction to commit
+	}
+	if tx.Error != nil {
+		return tx.Error // If there was an error, return it
+	}
+
+	// Attempt to commit the transaction
+	if err := tx.Commit().Error; err != nil {
+		// If commit fails, attempt to rollback
+		if rbErr := tx.Rollback().Error; rbErr != nil {
+			return fmt.Errorf("failed to commit transaction: %w, and failed to rollback: %v", err, rbErr)
+		}
+		return fmt.Errorf("failed to commit transaction and rolled back: %w", err)
+	}
+	return nil
+}
+
+
 // WithTransactionContextTimeout executes a function within a transaction with a specified context timeout.
 // The transaction is committed if successful, or rolled back if an error occurs or the context times out.
 func (d *TransactorImpl) WithTransactionContextTimeout(ctx context.Context, timeout time.Duration, tFunc func(ctx context.Context) error) error {
@@ -145,6 +168,7 @@ type IDatabaseTransactor interface {
 	WithTransactionContextTimeout(ctx context.Context, timeout time.Duration, tFunc func(ctx context.Context) error) error
 	BeginTransaction() (*gorm.DB, error)
 	RollbackTransaction(tx *gorm.DB) error
+	CommitTransaction(tx *gorm.DB) error
 }
 
 func NewTransactorRepo(db *gorm.DB) IDatabaseTransactor {
