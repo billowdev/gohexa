@@ -25,5 +25,8 @@ go.work.sum
 .env
 
 ./build
-build/gohexa-mac
+build/gohexa-32.exe
 build/gohexa-linux
+build/gohexa-mac
+build/gohexa-mac-arm
+build/gohexa.exe
