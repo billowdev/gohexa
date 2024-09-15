@@ -25,7 +25,7 @@ type {{ .FeatureName }}Domain struct {
 	CreatedAt          time.Time ` + "`json:\"created_at\"`" + `
 	UpdatedAt          time.Time ` + "`json:\"updated_at\"`" + `
 	Field1      string    ` + "`json:\"field_1\" validate: \"required,max=50\"`" + `
-	Field2      string    ` + "`json:\"field_2\" validate: \"omitempty,max=50\"`" + `
+	Field2      string    ` + "`json:\"field_2\" validate: \"max=50\"`" + `
 }
 
 func To{{ .FeatureName }}Domain(data *models.{{ .FeatureName }}) {{ .FeatureName }}Domain {
@@ -54,14 +54,14 @@ func To{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) *models.{{ .Featur
 
 type Update{{ .FeatureName }}Domain struct {
 {{ if .UseUUID }}
-	ID                 string    ` + "`json:\"id\"`" + `
+	ID                 string    ` + "`json:\"id,omitempty\"`" + `
 {{ else }}
-	ID                 uint      ` + "`json:\"id\"`" + `
+	ID                 uint      ` + "`json:\"id,omitempty\"`" + `
 {{ end }}
-	CreatedAt          time.Time ` + "`json:\"created_at\"`" + `
-	UpdatedAt          time.Time ` + "`json:\"updated_at\"`" + `
-	Field1      string    ` + "`json:\"field_1\" validate: \"required,max=50\"`" + `
-	Field2      string    ` + "`json:\"field_2\" validate: \"omitempty,max=50\"`" + `
+	CreatedAt          time.Time ` + "`json:\"created_at,omitempty\"`" + `
+	UpdatedAt          time.Time ` + "`json:\"updated_at,omitempty\"`" + `
+	Field1      string    ` + "`json:\"field_1,omitempty\" validate: \"omitempty,max=50\"`" + `
+	Field2      string    ` + "`json:\"field_2,omitempty\" validate: \"omitempty,max=50\"`" + `
 }
 
 func UpdateDomainTo{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) *models.{{ .FeatureName }} {
