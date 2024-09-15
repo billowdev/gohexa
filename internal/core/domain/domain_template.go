@@ -42,14 +42,17 @@ func To{{ .FeatureName }}Domain(data *models.{{ .FeatureName }}) {{ .FeatureName
 	}
 }
 
-func To{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) *models.{{ .FeatureName }} {
+func To{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) (*models.{{ .FeatureName }}, error) {
+	// validate data
+
+	// return models
 	return &models.{{ .FeatureName }}{
 		ID:                 data.ID,
 		CreatedAt:          data.CreatedAt,
 		UpdatedAt:          data.UpdatedAt,
 		Field1:             data.Field1,
 		Field2:             data.Field2,
-	}
+	}, nil
 }
 
 type Update{{ .FeatureName }}Domain struct {
@@ -64,13 +67,16 @@ type Update{{ .FeatureName }}Domain struct {
 	Field2      string    ` + "`json:\"field_2,omitempty\" validate: \"omitempty,max=50\"`" + `
 }
 
-func UpdateDomainTo{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) *models.{{ .FeatureName }} {
+func UpdateDomainTo{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) (*models.{{ .FeatureName }}, error) {
+	// validate data
+
+	// return models
 	return &models.{{ .FeatureName }}{
 		ID:                 data.ID,
 		CreatedAt:          data.CreatedAt,
 		UpdatedAt:          data.UpdatedAt,
 		Field1:             data.Field1,
 		Field2:             data.Field2,
-	}
+	}, nil
 }
 `
