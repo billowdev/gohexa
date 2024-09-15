@@ -27,6 +27,37 @@ func New{{ .FeatureName }}Repository(db *gorm.DB) ports.I{{ .FeatureName }}Repos
 	return &{{ .FeatureName }}Impl{db: db}
 }
 
+// BulkCreate{{ .FeatureName }} implements ports.I{{ .FeatureName }}Repository.
+// It accepts a slice of {{ .FeatureName }} and inserts them into the database in bulk.
+func (o *{{ .FeatureName }}Impl) BulkCreate{{ .FeatureName }}(ctx context.Context, payloads []*models.{{ .FeatureName }}) error {
+	tx := database.HelperExtractTx(ctx, o.db)
+
+	// Start a new transaction context
+	tx = tx.WithContext(ctx)
+
+	// Perform bulk creation
+	if err := tx.Create(&payloads).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// GetOneByFields implements ports.I{{ .FeatureName }}Repository.
+func (o *{{ .FeatureName }}Impl) GetOneByFields(ctx context.Context, filters map[string]interface{}) (*models.{{ .FeatureName }}, error) {
+	tx := c.db.WithContext(ctx)
+	var data models.{{ .FeatureName }}
+	// Build the query dynamically based on the filters using the utility function
+	query, args := helpers.BuildQueryConditions(filters)
+
+	// Execute the query
+	if err := tx.Where(query, args...).First(&data).Error; err != nil {
+		return nil, err
+	}
+
+	return &data, nil
+}
+
 // Create{{ .FeatureName }} implements ports.I{{ .FeatureName }}Repository.
 func (o *{{ .FeatureName }}Impl) Create{{ .FeatureName }}(ctx context.Context, payload *models.{{ .FeatureName }}) error {
 	tx := database.HelperExtractTx(ctx, o.db)

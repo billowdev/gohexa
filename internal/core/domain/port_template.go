@@ -19,6 +19,8 @@ import (
 )
 
 type I{{ .FeatureName }}Repository interface {
+	BulkCreate{{ .FeatureName }}(ctx context.Context, payloads []*models.{{ .FeatureName }}) error
+	GetOneByFields(ctx context.Context, filters map[string]interface{})
 	Get{{ .FeatureName }}(ctx context.Context, id {{ .IDType }}) (*models.{{ .FeatureName }}, error)
 	Get{{ .FeatureName }}s(ctx context.Context) (*pagination.Pagination[[]models.{{ .FeatureName }}], error)
 	Create{{ .FeatureName }}(ctx context.Context, payload *models.{{ .FeatureName }}) error

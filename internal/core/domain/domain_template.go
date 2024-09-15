@@ -18,25 +18,19 @@ import (
 
 type {{ .FeatureName }}Domain struct {
 {{ if .UseUUID }}
-	ID                 string    ` + "`gorm:\"type:uuid;primaryKey;default:uuid_generate_v4()\" json:\"id\"`" + `
+	ID                 string    ` + "`json:\"id\"`" + `
 {{ else }}
-	ID                 uint      ` + "`gorm:\"primaryKey;autoIncrement\" json:\"id\"`" + `
+	ID                 uint      ` + "`json:\"id\"`" + `
 {{ end }}
-	CreatedAt          time.Time ` + "`json:\"created_at\" gorm:\"autoCreateTime\"`" + `
-	UpdatedAt          time.Time ` + "`json:\"updated_at\" gorm:\"autoUpdateTime\"`" + `
-	Field1      string    ` + "`json:\"field_1\"`" + `
-	Field2      string    ` + "`json:\"field_2\"`" + `
+	CreatedAt          time.Time ` + "`json:\"created_at\"`" + `
+	UpdatedAt          time.Time ` + "`json:\"updated_at\"`" + `
+	Field1      string    ` + "`json:\"field_1\" validate: \"required,max=50\"`" + `
+	Field2      string    ` + "`json:\"field_2\" validate: \"max=50\"`" + `
 }
 
 func To{{ .FeatureName }}Domain(data *models.{{ .FeatureName }}) {{ .FeatureName }}Domain {
 	if data == nil {
-		return {{ .FeatureName }}Domain{
-			{{ if .UseUUID }}
-			ID: "{{ .DefaultUUID }}",
-			{{ else }}
-			ID: 0,
-			{{ end }}
-		}
+		return {{ .FeatureName }}Domain{}
 	}
 
 	return {{ .FeatureName }}Domain{
@@ -44,25 +38,45 @@ func To{{ .FeatureName }}Domain(data *models.{{ .FeatureName }}) {{ .FeatureName
 		CreatedAt:          data.CreatedAt,
 		UpdatedAt:          data.UpdatedAt,
 		Field1:             data.Field1,
-		Field2:             defaultStringIfEmpty(data.Field2, "No Field2"),
+		Field2:             data.Field2,
 	}
 }
 
-func To{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) *models.{{ .FeatureName }} {
+func To{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) (*models.{{ .FeatureName }}, error) {
+	// validate data
+
+	// return models
 	return &models.{{ .FeatureName }}{
 		ID:                 data.ID,
 		CreatedAt:          data.CreatedAt,
 		UpdatedAt:          data.UpdatedAt,
 		Field1:             data.Field1,
-		Field2:             defaultStringIfEmpty(data.Field2, "No Field2"),
-	}
+		Field2:             data.Field2,
+	}, nil
 }
 
-// defaultStringIfEmpty returns the default value if the input string is empty
-func defaultStringIfEmpty(value, defaultValue string) string {
-	if value == "" {
-		return defaultValue
-	}
-	return value
+type Update{{ .FeatureName }}Domain struct {
+{{ if .UseUUID }}
+	ID                 string    ` + "`json:\"id,omitempty\"`" + `
+{{ else }}
+	ID                 uint      ` + "`json:\"id,omitempty\"`" + `
+{{ end }}
+	CreatedAt          time.Time ` + "`json:\"created_at,omitempty\"`" + `
+	UpdatedAt          time.Time ` + "`json:\"updated_at,omitempty\"`" + `
+	Field1      string    ` + "`json:\"field_1,omitempty\" validate: \"omitempty,max=50\"`" + `
+	Field2      string    ` + "`json:\"field_2,omitempty\" validate: \"omitempty,max=50\"`" + `
+}
+
+func UpdateDomainTo{{ .FeatureName }}Model(data {{ .FeatureName }}Domain) (*models.{{ .FeatureName }}, error) {
+	// validate data
+
+	// return models
+	return &models.{{ .FeatureName }}{
+		ID:                 data.ID,
+		CreatedAt:          data.CreatedAt,
+		UpdatedAt:          data.UpdatedAt,
+		Field1:             data.Field1,
+		Field2:             data.Field2,
+	}, nil
 }
 `
