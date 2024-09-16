@@ -47,8 +47,18 @@ func (o *{{ .FeatureName }}Impl) BulkCreate{{ .FeatureName }}(ctx context.Contex
 func (o *{{ .FeatureName }}Impl) GetOneByFields(ctx context.Context, filters map[string]interface{}) (*models.{{ .FeatureName }}, error) {
 	tx := c.db.WithContext(ctx)
 	var data models.{{ .FeatureName }}
-	// Build the query dynamically based on the filters using the utility function
-	query, args := helpers.BuildQueryConditions(filters)
+
+	// Start with a base query if no filters are provided
+	query := "1=1"
+	args := []interface{}{}
+
+	// Build the query dynamically based on the filters
+	if len(filters) > 0 {
+		for field, value := range filters {
+			query += fmt.Sprintf(" AND %s = ?", field)
+			args = append(args, value)
+		}
+	}
 
 	// Execute the query
 	if err := tx.Where(query, args...).First(&data).Error; err != nil {
